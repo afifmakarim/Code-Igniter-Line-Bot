@@ -42,18 +42,26 @@ class Webhook extends CI_Controller {
 
 		//condition to reply message
 		if (preg_match("test", $message)) {
-			$reply = "ชื่อปูเป้จ้าา";
+            $reply = "esol";
+            sendMessage($reply, $replyToken);
 		} else {
-			$reply = "สวัสดีจ้า";
+            $reply = "ey";
+            sendMessage($reply, $replyToken);
 		}
-		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($reply);
+        
+    }
+    
+    function sendMessage($reply, $replyToken){
+
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($reply);
 		$response = $bot->replyMessage($replyToken, $textMessageBuilder);
 		if ($response->isSucceeded()) {
 			echo 'Succeeded!';
 			return;
-		}
-
-		// Failed
+		}else{
+        // Failed
 		echo $response->getHTTPStatus().' '.$response->getRawBody();
-	}
+        }
+        
+    }
 }
