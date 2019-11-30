@@ -16,6 +16,10 @@ class Webhook extends CI_Controller {
 	function __construct() {
         parent::__construct();
 
+	}
+
+	function index() {
+
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 			echo "Hello Coders!";
 			header('HTTP/1.1 400 Only POST method allowed');
@@ -30,15 +34,10 @@ class Webhook extends CI_Controller {
 
 		//decode json to array
 		$events = json_decode($content, true);
-	}
-
-	function index() {
-
 		//get reply token and message if events is not null
 		if (!is_null($events)) {
 			$replyToken = $events['events'][0]['replyToken'];
             $message = $events['events'][0]['message']['text'];
-            print_r($events);
 		}
 
 		//condition to reply message
@@ -47,10 +46,10 @@ class Webhook extends CI_Controller {
 		} else {
             $reply = "ey";
 		}
-        $this->sendMessage($reply, $replyToken);
+        $this->sendMessage($reply, $replyToken, $bot);
     }
     
-    function sendMessage($reply, $replyToken){
+    function sendMessage($reply, $replyToken, $bot){
 
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($reply);
 		$response = $bot->replyMessage($replyToken, $textMessageBuilder);
