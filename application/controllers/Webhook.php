@@ -14,11 +14,7 @@ require_once('bot_settings.php');
 class Webhook extends CI_Controller {
 
 	function __construct() {
-		parent::__construct();
-	}
-
-	function index() {
-
+        parent::__construct();
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 			echo "Hello Coders!";
 			header('HTTP/1.1 400 Only POST method allowed');
@@ -33,6 +29,9 @@ class Webhook extends CI_Controller {
 
 		//decode json to array
 		$events = json_decode($content, true);
+	}
+
+	function index() {
 
 		//get reply token and message if events is not null
 		if (!is_null($events)) {
