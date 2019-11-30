@@ -54,11 +54,12 @@ class Webhook extends CI_Controller {
 		}
 
 		//condition to reply message
-		if (preg_match("test", $message)) {
-            $reply = "esol";
-		} else {
+		if(strtolower($message) == '/help'){
+            $reply = "Command List :\n/help : menampilkan command list bot\n/mulai : memulai permainan\n/skip : skip soal\n/hapus : menghapus permainan\n/keluar : kick bot dari group/room chat";
+		} else if(strtolower($message) == 'ey'){
             $reply = "ey";
-		}
+        }
+        
         $this->sendMessage($reply, $replyToken, $bot);
     }
     
@@ -67,12 +68,8 @@ class Webhook extends CI_Controller {
         $textMessageBuilder = new TextMessageBuilder($reply);
 		$response = $bot->replyMessage($replyToken, $textMessageBuilder);
 		if ($response->isSucceeded()) {
-			echo 'Succeeded!';
 			return;
-		}else{
-        // Failed
-		echo $response->getHTTPStatus().' '.$response->getRawBody();
-        }
+		}
 
     }
 }
