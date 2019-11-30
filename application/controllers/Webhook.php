@@ -43,12 +43,10 @@ class Webhook extends CI_Controller {
 		//condition to reply message
 		if (preg_match("test", $message)) {
             $reply = "esol";
-            sendMessage($reply, $replyToken);
 		} else {
             $reply = "ey";
-            sendMessage($reply, $replyToken);
 		}
-        
+        sendMessage($reply, $replyToken);
     }
     
     function sendMessage($reply, $replyToken){
@@ -62,6 +60,6 @@ class Webhook extends CI_Controller {
         // Failed
 		echo $response->getHTTPStatus().' '.$response->getRawBody();
         }
-        
+
     }
 }
