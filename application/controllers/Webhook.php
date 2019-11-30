@@ -25,8 +25,8 @@ class Webhook extends CI_Controller {
 			exit;
         } 
         
-		$httpClient = new\LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGE_ACCESS_TOKEN);
-		$bot = new\LINE\LINEBot($httpClient,['channelSecret'=>LINE_MESSAGE_CHANNEL_SECRET]);
+		$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(LINE_MESSAGE_ACCESS_TOKEN);
+		$bot = new \LINE\LINEBot($httpClient,['channelSecret'=>LINE_MESSAGE_CHANNEL_SECRET]);
 
 		//recieve data from LINE Messaging API
 		$content = file_get_contents('php://input');
@@ -46,7 +46,7 @@ class Webhook extends CI_Controller {
 		} else {
 			$reply = "สวัสดีจ้า";
 		}
-		$textMessageBuilder = new\LINE\LINEBot\MessageBuilder\TextMessageBuilder($reply);
+		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($reply);
 		$response = $bot->replyMessage($replyToken, $textMessageBuilder);
 		if ($response->isSucceeded()) {
 			echo 'Succeeded!';
